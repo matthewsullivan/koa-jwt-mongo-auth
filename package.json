@@ -5,7 +5,7 @@
   },
   "config": {
     "db": {
-      "database": "kjpa_test"
+      "database": "kjma_test"
     }
   },
   "description": "koa-jwt-mongo-auth",
@@ -22,9 +22,7 @@
     "nodemon": "^2.0.2",
     "owasp-password-strength-test": "^1.3.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
-    "pg": "^7.4.0",
-    "pg-extra": "^0.1.1"
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^3.6.0",
@@ -49,8 +47,7 @@
     "url": "git+https://github.com/matthewsullivan/koa-jwt-mongo-auth.git"
   },
   "scripts": {
-    "db-init": "npm init -f && npm run -s db-tables && npm run -s db-seed",
-    "db-tables": "find modules/*/models/tables -name *.sql -exec psql -d $npm_package_config_db_database -U postgres -h localhost -f {} \\;",
+    "db-init": "npm init -f && npm run -s db-seed",
     "db-seed": "node ./config/lib/seed.js",
     "debug": "NODE_ENV=development && nodemon --inspect app.js",
     "start": "NODE_ENV=production && node app.js",
