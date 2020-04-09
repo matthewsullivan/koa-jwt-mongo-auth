@@ -1,4 +1,4 @@
-<img alt="Stack Logos" src="https://www.static.matthewsullivan.media/kjp.png" width="480" />
+<img alt="Stack Logos" src="https://www.static.matthewsullivan.media/kjm.png" width="480" />
 
 ## Koa, JWT, and MongoDB Authentication
 Lightweight user registration/login API that returns stateless [json web tokens](https://jwt.io/) to access secured routes.
