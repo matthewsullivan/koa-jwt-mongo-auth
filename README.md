@@ -1,13 +1,13 @@
 <img alt="Stack Logos" src="https://www.static.matthewsullivan.media/kjp.png" width="480" />
 
-## Koa, JWT, and Postgres Authentication
+## Koa, JWT, and MongoDB Authentication
 Lightweight user registration/login API that returns stateless [json web tokens](https://jwt.io/) to access secured routes.
 
 #### Installation
-See [Local Development Wiki](https://github.com/matthewsullivan/koa-jwt-postgres-auth/wiki/Development-::-Local)
+See [Local Development Wiki](https://github.com/matthewsullivan/koa-jwt-mongo-auth/wiki/Development-::-Local)
 
 #### Testing
-See [Testing Wiki](https://github.com/matthewsullivan/koa-jwt-postgres-auth/wiki/Development-::-Testing)
+See [Testing Wiki](https://github.com/matthewsullivan/koa-jwt-mongo-auth/wiki/Development-::-Testing)
     
 ## Contributing
 Pull requests are welcome. For major changes, open an issue first to discuss what you would like to change.
