@@ -1,14 +1,14 @@
 {
   "author": "Matthew Sullivan",
   "bugs": {
-    "url": "https://github.com/matthewsullivan/koa-jwt-postgres-auth/issues"
+    "url": "https://github.com/matthewsullivan/koa-jwt-mongo-auth/issues"
   },
   "config": {
     "db": {
       "database": "kjpa_test"
     }
   },
-  "description": "koa-jwt-postgres-auth",
+  "description": "koa-jwt-mongo-auth",
   "dependencies": {
     "argon2": "^0.15.0",
     "email-validator": "^2.0.4",
@@ -39,14 +39,14 @@
   "engines": {
     "node": ">=8.9.1 <11.10.0"
   },
-  "homepage": "https://github.com/matthewsullivan/koa-jwt-postgres-auth#readme",
+  "homepage": "https://github.com/matthewsullivan/koa-jwt-mongo-auth#readme",
   "keywords": [],
   "license": "MIT",
   "main": "app.js",
-  "name": "koa-jwt-postgres-auth",
+  "name": "koa-jwt-mongo-auth",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matthewsullivan/koa-jwt-postgres-auth.git"
+    "url": "git+https://github.com/matthewsullivan/koa-jwt-mongo-auth.git"
   },
   "scripts": {
     "db-init": "npm init -f && npm run -s db-tables && npm run -s db-seed",
