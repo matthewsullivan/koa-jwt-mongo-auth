@@ -1,8 +1,5 @@
 const path = require('path');
 
-const {pool} = require(path.resolve('./config/lib/pg/pg'));
-const {sql} = require('pg-extra');
-
 module.exports = {
   /**
    * Get User By Email
@@ -16,7 +13,7 @@ module.exports = {
       WHERE email = ${email};
     `;
 
-    return pool.query(statement);
+    // return pool.query(statement);
   },
 
   /**
@@ -31,6 +28,6 @@ module.exports = {
       WHERE id = ${userId};
     `;
 
-    return pool.query(statement);
+    // return pool.query(statement);
   },
 };
