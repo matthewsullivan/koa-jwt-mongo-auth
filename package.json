@@ -5,7 +5,9 @@
   },
   "config": {
     "db": {
-      "database": "kjma_test"
+      "database": "kjma_test",
+      "host": "localhost",
+      "port": 27017
     }
   },
   "description": "koa-jwt-mongo-auth",
@@ -48,7 +50,8 @@
     "url": "git+https://github.com/matthewsullivan/koa-jwt-mongo-auth.git"
   },
   "scripts": {
-    "db-init": "npm init -f && npm run -s db-seed",
+    "db-collections": "mongo $npm_package_config_db_host:$npm_package_config_db_port/$npm_package_config_db_database modules/*/models/collections/*.js",
+    "db-init": "npm init -f && npm run -s db-collections && npm run -s db-seed",
     "db-seed": "node ./config/lib/seed.js",
     "debug": "NODE_ENV=development && nodemon --inspect app.js",
     "start": "NODE_ENV=production && node app.js",

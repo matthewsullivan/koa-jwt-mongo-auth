@@ -9,6 +9,7 @@ const passport = require('koa-passport');
 const path = require('path');
 
 const config = require(path.resolve('./config/env/default'));
+const mongo = require(path.resolve('./config/lib/mongo/mongo'));
 
 app.use(body()).use(passport.initialize());
 app.use(helmet());
@@ -22,7 +23,7 @@ glob.sync('./modules/*/routes/*.js').forEach((file) => {
 app.keys = ['koa-jwt-postgres-auth'];
 app.proxy = true;
 
-app.listen(config.server.port);
+mongo.connect(() => app.listen(config.server.port));
 
 console.log('\nKoa, JWT, and Mongo Authentication API\n');
 console.log(`Environment: \t ${process.env.NODE_ENV}`);

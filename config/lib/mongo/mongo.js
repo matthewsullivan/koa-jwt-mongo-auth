@@ -2,27 +2,20 @@ const path = require('path');
 
 const client = require('mongodb').MongoClient;
 const config = require(path.resolve('./config/env/default'));
-const url = `mongodb://127.0.0.1:27017/${config.db.database}`;
+const url = `mongodb://${config.db.host}:${config.db.port}/${config.db.database}`;
 
-let mongodb;
-
-const close = () => {
-  mongodb.close();
-};
+let database;
 
 const connect = (callback) => {
-  client.connect(url, (err, db) => {
-    mongodb = db;
+  const options = {useUnifiedTopology: true};
+
+  client.connect(url, options, (err, db) => {
+    database = db;
     callback();
   });
 };
 
-const get = () => {
-  return mongodb;
-};
-
 module.exports = {
-  close,
   connect,
-  get,
+  database,
 };

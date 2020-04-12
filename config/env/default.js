@@ -5,7 +5,7 @@ const config = {
     database: 'kjma_test',
     dialect: 'mongo',
     host: 'localhost',
-    port: 5432,
+    port: 27017,
   },
   expiration: process.env.JWT_EXPIRATION || '1h',
   secret: process.env.JWT_SECRET || 'jwt-secret',
