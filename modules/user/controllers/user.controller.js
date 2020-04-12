@@ -238,7 +238,9 @@ module.exports = {
       data.password = await encryptPassword(data.password);
 
       const response = await service.registerUser(data);
-      const user = response.rows[0];
+      const user = response.ops[0];
+
+      console.log(user);
 
       ctx.body = {
         data: {
@@ -253,6 +255,7 @@ module.exports = {
       ctx.status = 201;
     } catch (e) {
       console.log(e);
+
       ctx.status = 400;
 
       ctx.body = {

@@ -7,23 +7,31 @@ db.createCollection('user', {
       properties: {
         email: {
           bsonType: 'string',
-          description: 'Must provide a valid email',
-          pattern: '@mongodb.com$',
         },
         firstName: {
           bsonType: 'string',
-          description: 'Must provide a first name',
         },
         lastName: {
           bsonType: 'string',
-          description: 'Must provide a last name',
         },
         password: {
           bsonType: 'string',
-          description: 'Must provide a password',
+        },
+        created: {
+          bsonType: 'date',
+        },
+        updated: {
+          bsonType: 'date',
         },
       },
-      required: ['email', 'firstName', 'lastName', 'password'],
+      required: [
+        'email',
+        'firstName',
+        'lastName',
+        'password',
+        'created',
+        'updated',
+      ],
     },
   },
 });

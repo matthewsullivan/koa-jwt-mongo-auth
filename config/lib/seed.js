@@ -14,8 +14,6 @@ const seed = (() => {
   const init = async () => {
     const connection = await mongo.connect();
 
-    console.log(connection);
-
     await registerUser();
 
     connection.close();

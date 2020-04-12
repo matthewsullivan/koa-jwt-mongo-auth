@@ -5,19 +5,16 @@ const path = require('path');
 const config = require(path.resolve('./config/env/default'));
 const url = `mongodb://${config.db.host}:${config.db.port}`;
 
-let client;
 let database;
-
-const close = () => {
-  client.close();
-};
 
 const connect = async () => {
   const options = {useUnifiedTopology: true};
 
-  client = await MongoClient.connect(url, options);
+  const client = await MongoClient.connect(url, options);
 
   database = client.db(config.db.database);
+
+  return client;
 };
 
 const db = () => {
@@ -25,7 +22,6 @@ const db = () => {
 };
 
 module.exports = {
-  close,
   connect,
   db,
 };

@@ -77,18 +77,6 @@ module.exports = {
    * @return {object}
    */
   registerUser: (user) => {
-    // const statement = sql`
-    //   INSERT INTO public.user (email, password, first_name, last_name)
-    //   VALUES (
-    //     TRIM(${user.email.toLowerCase()}),
-    //     TRIM(${user.password}),
-    //     TRIM(${user.firstName}),
-    //     TRIM(${user.lastName})
-    //   )
-    //   RETURNING id, email, first_name, last_name, created;
-    // `;
-    // return pool.query(statement);
-
     const collection = mongo.db().collection('user');
 
     const statement = collection.insertOne({
@@ -96,6 +84,8 @@ module.exports = {
       firstName: user.firstName,
       lastName: user.lastName,
       password: user.password,
+      created: new Date(),
+      updated: new Date(),
     });
 
     return statement;
