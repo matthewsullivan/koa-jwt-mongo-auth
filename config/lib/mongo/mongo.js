@@ -1,21 +1,31 @@
+const MongoClient = require('mongodb').MongoClient;
+
 const path = require('path');
 
-const client = require('mongodb').MongoClient;
 const config = require(path.resolve('./config/env/default'));
-const url = `mongodb://${config.db.host}:${config.db.port}/${config.db.database}`;
+const url = `mongodb://${config.db.host}:${config.db.port}`;
 
+let client;
 let database;
 
-const connect = (callback) => {
+const close = () => {
+  client.close();
+};
+
+const connect = async () => {
   const options = {useUnifiedTopology: true};
 
-  client.connect(url, options, (err, db) => {
-    database = db;
-    callback();
-  });
+  client = await MongoClient.connect(url, options);
+
+  database = client.db(config.db.database);
+};
+
+const db = () => {
+  return database;
 };
 
 module.exports = {
+  close,
   connect,
-  database,
+  db,
 };

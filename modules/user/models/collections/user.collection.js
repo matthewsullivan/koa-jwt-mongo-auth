@@ -1,4 +1,6 @@
-﻿db.createCollection('users', {
+﻿db.user.drop();
+
+db.createCollection('user', {
   validator: {
     $jsonSchema: {
       bsonType: 'object',

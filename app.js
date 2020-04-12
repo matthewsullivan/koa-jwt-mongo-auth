@@ -23,7 +23,9 @@ glob.sync('./modules/*/routes/*.js').forEach((file) => {
 app.keys = ['koa-jwt-postgres-auth'];
 app.proxy = true;
 
-mongo.connect(() => app.listen(config.server.port));
+app.listen(config.server.port);
+
+(async () => await mongo.connect())();
 
 console.log('\nKoa, JWT, and Mongo Authentication API\n');
 console.log(`Environment: \t ${process.env.NODE_ENV}`);

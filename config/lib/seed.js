@@ -4,13 +4,21 @@ const controller = require(path.resolve(
   './modules/user/controllers/user.controller.js'
 ));
 
+const mongo = require(path.resolve('./config/lib/mongo/mongo'));
+
 const seed = (() => {
   /**
    * Init
    * @async
    */
   const init = async () => {
+    const connection = await mongo.connect();
+
+    console.log(connection);
+
     await registerUser();
+
+    connection.close();
   };
 
   /**

@@ -1,5 +1,7 @@
 const path = require('path');
 
+const mongo = require(path.resolve('./config/lib/mongo/mongo'));
+
 module.exports = {
   /**
    * Get User By Email
@@ -75,17 +77,27 @@ module.exports = {
    * @return {object}
    */
   registerUser: (user) => {
-    const statement = sql`
-      INSERT INTO public.user (email, password, first_name, last_name)
-      VALUES (
-        TRIM(${user.email.toLowerCase()}),
-        TRIM(${user.password}),
-        TRIM(${user.firstName}),
-        TRIM(${user.lastName})
-      )
-      RETURNING id, email, first_name, last_name, created;
-    `;
-
+    // const statement = sql`
+    //   INSERT INTO public.user (email, password, first_name, last_name)
+    //   VALUES (
+    //     TRIM(${user.email.toLowerCase()}),
+    //     TRIM(${user.password}),
+    //     TRIM(${user.firstName}),
+    //     TRIM(${user.lastName})
+    //   )
+    //   RETURNING id, email, first_name, last_name, created;
+    // `;
     // return pool.query(statement);
+
+    const collection = mongo.db().collection('user');
+
+    const statement = collection.insertOne({
+      email: user.email.toLowerCase(),
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: user.password,
+    });
+
+    return statement;
   },
 };
