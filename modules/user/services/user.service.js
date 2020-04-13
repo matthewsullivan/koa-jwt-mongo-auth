@@ -36,7 +36,7 @@ module.exports = {
   updatePassword: (user) => {
     const collection = mongo.db().collection('user');
 
-    const statement = collection.updateOne(
+    const statement = collection.findOneAndUpdate(
       {
         _id: ObjectId(user.id),
       },
