@@ -2,6 +2,7 @@ const path = require('path');
 const test = require('ava');
 
 const app = require(path.resolve('./app.js'));
+const mongo = require(path.resolve('./config/lib/mongo/mongo'));
 const request = require('supertest').agent(app.listen());
 
 const user = {
@@ -10,6 +11,12 @@ const user = {
   lastName: 'Doe',
   password: '(a1B2c3D4e5F6g)',
 };
+
+let connection;
+
+test.before('Connect to MongoDB', async (t) => {
+  connection = await mongo.connect();
+});
 
 test.serial('Registration should not allow invalid email', async (t) => {
   const response = await request.post('/api/v1/register/').send({
@@ -181,4 +188,8 @@ test.serial('Should update profile', async (t) => {
 
   t.is(loginResponse.status, 200);
   t.is(response.status, 200);
+});
+
+test.after.always('Disconnect to MongoDB', (t) => {
+  connection.close();
 });
