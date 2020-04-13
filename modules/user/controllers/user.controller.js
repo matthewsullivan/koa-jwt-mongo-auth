@@ -55,8 +55,7 @@ module.exports = {
    */
   getUser: async (ctx) => {
     const params = ctx.params;
-    const response = await service.getUserById(params.id);
-    const user = response.rows[0];
+    const user = await service.getUserById(params.id);
 
     if (!user) {
       ctx.status = 400;
@@ -156,10 +155,9 @@ module.exports = {
 
     data.id = ctx.token.id;
 
-    const responseA = await service.getUserByEmail(data.email);
-    const userA = responseA.rows[0];
+    const userA = await service.getUserByEmail(data.email);
 
-    if (userA && userA.id !== data.id) {
+    if (userA && userA._id !== data.id) {
       ctx.status = 400;
 
       ctx.body = {

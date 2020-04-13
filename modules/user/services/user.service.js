@@ -9,13 +9,10 @@ module.exports = {
    * @return {object}
    */
   getUserByEmail: (email) => {
-    const statement = sql`
-      SELECT id, email, first_name, last_name, created, updated 
-      FROM public.user
-      WHERE email = ${email};
-    `;
+    const collection = mongo.db().collection('user');
+    const statement = collection.findOne({email: email});
 
-    // return pool.query(statement);
+    return statement;
   },
 
   /**
@@ -24,13 +21,10 @@ module.exports = {
    * @return {object}
    */
   getUserById: (userId) => {
-    const statement = sql`
-      SELECT id, email, first_name, last_name, created 
-      FROM public.user
-      WHERE id = ${userId};
-    `;
+    const collection = mongo.db().collection('user');
+    const statement = collection.findOne({_id: userId});
 
-    // return pool.query(statement);
+    return statement;
   },
 
   /**
@@ -39,16 +33,21 @@ module.exports = {
    * @return {object}
    */
   updatePassword: (user) => {
-    const statement = sql`
-      UPDATE public.user
-      SET 
-        password = ${user.password},
-        updated = now()
-      WHERE id = ${user.id}
-      RETURNING id;
-    `;
+    const collection = mongo.db().collection('user');
 
-    // return pool.query(statement);
+    const statement = collection.updateOne(
+      {
+        _id: user._id,
+      },
+      {
+        $set: {
+          password: user.password,
+          updated: new Date(),
+        },
+      }
+    );
+
+    return statement;
   },
 
   /**
@@ -57,18 +56,23 @@ module.exports = {
    * @return {object}
    */
   updateProfile: (user) => {
-    const statement = sql`
-      UPDATE public.user
-      SET 
-        email = TRIM(${user.email.toLowerCase()}),
-        first_name = TRIM(${user.firstName}),
-        last_name = TRIM(${user.lastName}),
-        updated = now()
-      WHERE id = ${user.id}
-      RETURNING id, email, first_name, last_name, created, updated;
-    `;
+    const collection = mongo.db().collection('user');
 
-    // return pool.query(statement);
+    const statement = collection.updateOne(
+      {
+        _id: user._id,
+      },
+      {
+        $set: {
+          email: user.email.toLowerCase(),
+          firstName: user.firstName,
+          lastName: user.lastName,
+          updated: new Date(),
+        },
+      }
+    );
+
+    return statement;
   },
 
   /**

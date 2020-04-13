@@ -26,7 +26,8 @@ app.proxy = true;
 (async () => {
   const connection = await mongo.connect();
 
-  console.log(connection.status);
+  console.log(`Store: \t\t ${connection.s.url}`);
+  console.log(`\n${new Date().toString()}`);
 })();
 
 app.listen(config.server.port);
@@ -34,6 +35,5 @@ app.listen(config.server.port);
 console.log('\nKoa, JWT, and Mongo Authentication API\n');
 console.log(`Environment: \t ${process.env.NODE_ENV}`);
 console.log(`Port: \t\t ${config.server.port}`);
-console.log(`\n${new Date().toString()}\n`);
 
 module.exports = app;
