@@ -37,7 +37,7 @@ module.exports = {
 
     const statement = collection.updateOne(
       {
-        _id: user._id,
+        _id: user.id,
       },
       {
         $set: {
@@ -58,9 +58,11 @@ module.exports = {
   updateProfile: (user) => {
     const collection = mongo.db().collection('user');
 
+    console.log(user.id);
+
     const statement = collection.updateOne(
       {
-        _id: user._id,
+        _id: user.id,
       },
       {
         $set: {

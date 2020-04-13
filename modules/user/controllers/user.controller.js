@@ -115,7 +115,7 @@ module.exports = {
 
     const response = await service.updatePassword(data);
 
-    if (response.rowCount) {
+    if (response) {
       ctx.body = {
         data: {
           title: 'Succesfully Updated Password.',
@@ -173,8 +173,7 @@ module.exports = {
       return;
     }
 
-    const responseB = await service.updateProfile(data);
-    const userB = responseB.rows[0];
+    const userB = await service.updateProfile(data);
 
     ctx.body = {
       attributes: {
@@ -204,7 +203,7 @@ module.exports = {
       ctx.body = {
         errors: [
           {
-            detail: 'A valid email must be utlized to register.',
+            detail: 'A valid email must be utilized to register.',
             status: ctx.status,
             title: 'Invalid Email.',
           },
@@ -230,26 +229,10 @@ module.exports = {
       return;
     }
 
-    try {
-      const data = ctx.request.body;
+    const data = ctx.request.body;
+    const responseA = await service.getUserByEmail(data.email);
 
-      data.password = await encryptPassword(data.password);
-
-      const response = await service.registerUser(data);
-      const user = response.ops[0];
-
-      ctx.body = {
-        data: {
-          attributes: {
-            user: user,
-          },
-          title: 'Succesfully Registered.',
-          type: 'user',
-        },
-      };
-
-      ctx.status = 201;
-    } catch {
+    if (responseA) {
       ctx.status = 400;
 
       ctx.body = {
@@ -261,6 +244,25 @@ module.exports = {
           },
         ],
       };
+
+      return;
     }
+
+    data.password = await encryptPassword(data.password);
+
+    const responseB = await service.registerUser(data);
+    const user = responseB.ops[0];
+
+    ctx.body = {
+      data: {
+        attributes: {
+          user: user,
+        },
+        title: 'Succesfully Registered.',
+        type: 'user',
+      },
+    };
+
+    ctx.status = 201;
   },
 };
