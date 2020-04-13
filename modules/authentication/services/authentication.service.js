@@ -1,5 +1,6 @@
 const path = require('path');
 
+const ObjectId = require('mongodb').ObjectID;
 const mongo = require(path.resolve('./config/lib/mongo/mongo'));
 
 module.exports = {
@@ -22,7 +23,7 @@ module.exports = {
    */
   getUserById: (userId) => {
     const collection = mongo.db().collection('user');
-    const statement = collection.findOne({_id: userId});
+    const statement = collection.findOne({_id: ObjectId(userId)});
 
     return statement;
   },

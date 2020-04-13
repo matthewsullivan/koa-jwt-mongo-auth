@@ -157,7 +157,7 @@ module.exports = {
 
     const userA = await service.getUserByEmail(data.email);
 
-    if (userA && userA._id !== data.id) {
+    if (userA && userA._id != data.id) {
       ctx.status = 400;
 
       ctx.body = {
@@ -177,7 +177,7 @@ module.exports = {
 
     ctx.body = {
       attributes: {
-        user: userB,
+        user: userB.value,
       },
       data: {
         title: 'Succesfully Updated Profile.',

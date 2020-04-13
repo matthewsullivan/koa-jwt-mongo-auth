@@ -1,5 +1,6 @@
 const path = require('path');
 
+const ObjectId = require('mongodb').ObjectID;
 const mongo = require(path.resolve('./config/lib/mongo/mongo'));
 
 module.exports = {
@@ -37,7 +38,7 @@ module.exports = {
 
     const statement = collection.updateOne(
       {
-        _id: user.id,
+        _id: ObjectId(user.id),
       },
       {
         $set: {
@@ -58,11 +59,9 @@ module.exports = {
   updateProfile: (user) => {
     const collection = mongo.db().collection('user');
 
-    console.log(user.id);
-
-    const statement = collection.updateOne(
+    const statement = collection.findOneAndUpdate(
       {
-        _id: user.id,
+        _id: ObjectId(user.id),
       },
       {
         $set: {
@@ -71,6 +70,9 @@ module.exports = {
           lastName: user.lastName,
           updated: new Date(),
         },
+      },
+      {
+        returnOriginal: false,
       }
     );
 
