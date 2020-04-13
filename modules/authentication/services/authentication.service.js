@@ -1,5 +1,7 @@
 const path = require('path');
 
+const mongo = require(path.resolve('./config/lib/mongo/mongo'));
+
 module.exports = {
   /**
    * Get User By Email
@@ -7,13 +9,10 @@ module.exports = {
    * @return {object}
    */
   getUserByEmail: (email) => {
-    const statement = sql`
-      SELECT id, email, first_name, last_name, password, created
-      FROM public.user
-      WHERE email = ${email};
-    `;
+    const collection = mongo.db().collection('user');
+    const statement = collection.findOne({email: email});
 
-    // return pool.query(statement);
+    return statement;
   },
 
   /**
@@ -22,12 +21,9 @@ module.exports = {
    * @return {object}
    */
   getUserById: (userId) => {
-    const statement = sql`
-      SELECT id, email, first_name, last_name, created 
-      FROM public.user
-      WHERE id = ${userId};
-    `;
+    const collection = mongo.db().collection('user');
+    const statement = collection.findOne({_id: userId});
 
-    // return pool.query(statement);
+    return statement;
   },
 };

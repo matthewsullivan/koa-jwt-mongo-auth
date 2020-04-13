@@ -15,8 +15,7 @@ const service = require(path.resolve(
  * @return {object}
  */
 const getUserById = async (userId) => {
-  const result = await service.getUserById(userId);
-  const user = result.rows[0];
+  const user = await service.getUserById(userId);
 
   return user;
 };
@@ -30,16 +29,13 @@ const getUserById = async (userId) => {
 const validate = async (credentials) => {
   const result = await service.getUserByEmail(credentials.email);
 
-  if (!result.rowCount) {
+  if (!result) {
     return false;
   }
 
-  const verified = await argon2.verify(
-    result.rows[0].password,
-    credentials.password
-  );
+  const verified = await argon2.verify(result.password, credentials.password);
 
-  return verified ? await getUserById(result.rows[0].id) : false;
+  return verified ? await getUserById(result._id) : false;
 };
 
 const options = {usernameField: 'email'};

@@ -240,8 +240,6 @@ module.exports = {
       const response = await service.registerUser(data);
       const user = response.ops[0];
 
-      console.log(user);
-
       ctx.body = {
         data: {
           attributes: {
@@ -253,9 +251,7 @@ module.exports = {
       };
 
       ctx.status = 201;
-    } catch (e) {
-      console.log(e);
-
+    } catch {
       ctx.status = 400;
 
       ctx.body = {

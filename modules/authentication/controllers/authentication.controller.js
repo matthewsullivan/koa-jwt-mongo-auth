@@ -17,8 +17,7 @@ require(path.resolve('./config/lib/passport/strategies/local'));
  * @return {object}
  */
 const getUserById = async (userId) => {
-  const response = await service.getUserById(userId);
-  const user = response.rows[0];
+  const user = await service.getUserById(userId);
 
   return user;
 };
