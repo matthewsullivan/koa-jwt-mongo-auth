@@ -8,9 +8,7 @@ const url = `mongodb://${config.db.host}:${config.db.port}`;
 let database;
 
 const connect = async () => {
-  const options = {useUnifiedTopology: true};
-
-  const client = await MongoClient.connect(url, options);
+  const client = await MongoClient.connect(url, {useUnifiedTopology: true});
 
   database = client.db(config.db.database);
 
