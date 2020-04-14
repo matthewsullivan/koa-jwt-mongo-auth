@@ -1,7 +1,8 @@
 const path = require('path');
 
-const ObjectId = require('mongodb').ObjectID;
 const mongo = require(path.resolve('./config/lib/mongo/mongo'));
+
+const ObjectId = require('mongodb').ObjectID;
 
 module.exports = {
   /**

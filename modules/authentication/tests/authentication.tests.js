@@ -25,6 +25,6 @@ test.serial('Should login seed user', async (t) => {
   t.is(response.status, 200);
 });
 
-test.after.always('Disconnect to MongoDB', (t) => {
+test.after.always('Disconnect from MongoDB', (t) => {
   connection.close();
 });

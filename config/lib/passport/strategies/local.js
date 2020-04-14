@@ -2,11 +2,11 @@ const argon2 = require('argon2');
 const passport = require('koa-passport');
 const path = require('path');
 
-const LocalStrategy = require('passport-local').Strategy;
-
 const service = require(path.resolve(
   './modules/authentication/services/authentication.service.js'
 ));
+
+const LocalStrategy = require('passport-local').Strategy;
 
 /**
  * Get User By Id

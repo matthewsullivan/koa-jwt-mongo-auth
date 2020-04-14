@@ -1,9 +1,9 @@
-const MongoClient = require('mongodb').MongoClient;
-
 const path = require('path');
 
 const config = require(path.resolve('./config/env/default'));
 const url = `mongodb://${config.db.host}:${config.db.port}`;
+
+const MongoClient = require('mongodb').MongoClient;
 
 let database;
 
