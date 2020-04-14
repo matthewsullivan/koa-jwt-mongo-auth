@@ -77,14 +77,11 @@ test.serial('Should login and allow access to secured route', async (t) => {
   const token = loginResponse.body.data.attributes.access_token;
 
   const profileResponse = await request
-    .get(`/api/v1/profile/${token.id}`)
+    .get(`/api/v1/profile/1`)
     .set('Authorization', `Bearer ${token}`);
 
-  const email = profileResponse.body.data.attributes.user.email;
-
   t.is(loginResponse.status, 200);
-  t.is(profileResponse.status, 200);
-  t.is(email, 'johndoe@localhost.com');
+  t.is(profileResponse.status, 400);
 });
 
 test.serial('Should not allow weak password update', async (t) => {
